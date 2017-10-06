@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>New Post: WRITE WRITE WRITE WRITE</h1>
+<form action='/blog' method='post'>
+    <tr>
+        <td>
+            <label>
+                Title:
+                <input type="text" name='new_post_name' />
+            </label>   
+        </td>
+    </tr>
+     <tr>
+     <div>   
+        <label>
+        Body:
+        </label>
+     </div>    
+        <td>
+            <textarea rows="9" cols="32" name="new_post_body"></textarea>
+        </td>
+    <div>
+        <input type="submit" value='Add Post'/>
+    </div>
+    </tr>   
+</form>
+
+{% endblock %}
