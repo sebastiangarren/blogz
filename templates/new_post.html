@@ -1,24 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>New Post: WRITE WRITE WRITE WRITE</h1>
+<h1>New Post: Time to write write write write</h1>
 <form action='/blog' method='post'>
     <tr>
         <td>
             <label>
                 Title:
-                <input type="text" name='new_post_name' />
-            </label>   
+                <input type="text" name='new_post_name' value='{{new_post_name}}'/>
+            </label>
         </td>
     </tr>
      <tr>
-     <div>   
+     <div>
         <label>
         Body:
         </label>
      </div>    
         <td>
-            <textarea rows="9" cols="32" name="new_post_body"></textarea>
+            <textarea rows="9" cols="32" name="new_post_body" value='{{new_post_body}}'></textarea>
         </td>
     <div>
         <input type="submit" value='Add Post'/>
