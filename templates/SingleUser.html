@@ -1,15 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Blogs</h1>
-    <form action='/new_post' method='post'>
-        <label>
-            Click here to write new post:
-        </label>
-        <input type="submit" value='New Post' />
-    </form>
-
-    <hr />
+    <h1>Posts by User</h1>
 
 
     {% if posts|length == 0 %}

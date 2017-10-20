@@ -8,6 +8,7 @@
             <label>
                 Title:
                 <input type="text" name='new_post_name' value='{{new_post_name}}'/>
+                <span class="error" name="name_error">{{ name_error }}</span>
             </label>
         </td>
     </tr>
@@ -19,6 +20,7 @@
      </div>    
         <td>
             <textarea rows="9" cols="32" name="new_post_body" value='{{new_post_body}}'></textarea>
+            <span class="error" name="body_error">{{ body_error }}</span>
         </td>
     <div>
         <input type="submit" value='Add Post'/>
