@@ -18,7 +18,7 @@ def require_login():
 
 #return all posts indiscriminately and with extreme prejudice
 def get_blog_posts():
-    posts = Blog_post.query.order_by(Blog_post.datetime).all()
+    posts = Blog_post.query.all()
     return posts
 
 #return all users undiscriminately and with extreme prjudice
@@ -26,6 +26,11 @@ def get_users():
     users = Author.query.all()
     return users
 
+#display username if logged in
+def get_session_name():
+    if session['username']:
+        session_name = session['username']
+        return session_name
 
 @app.route('/blog', methods=['POST', 'GET'])
 def blog():
@@ -44,7 +49,7 @@ def blog():
 
         if new_post.body == '' or new_post.title == '':
             flash("Every post must have text in the title and the body.", "error")
-            return render_template("/new_post.html", new_post_name=post_name, new_post_body=post_body)
+            return render_template("/new_post.html", new_post_name=post_name, new_post_body=post_body, session_name=get_session_name())
         else:
             db.session.add(new_post)
             db.session.commit()
@@ -55,13 +60,16 @@ def blog():
     if request.args.get('id'):
         post_number = request.args['id']
         post = Blog_post.query.filter_by(id=post_number).first()
-        return render_template('post_page.html', post=post)
+        user_id = post.author_id
+        user = Author.query.filter_by(id=user_id).first()
+        return render_template('post_page.html', post=post, user=user)
     if request.args.get('user'):
         user_number = request.args['user']
         posts = Blog_post.query.filter_by(author_id=user_number).all()
-        return render_template('SingleUser.html', posts=posts)
+        user = Author.query.filter_by(id=user_number).first()
+        return render_template('SingleUser.html', posts=posts, user=user, session_name=get_session_name())
 
-    return render_template('blogz.html', posts=get_blog_posts())
+    return render_template('blogz.html', posts=get_blog_posts(), users=get_users(), session_name=get_session_name())
     
 
 
@@ -70,7 +78,7 @@ def new_post():
     
 #new_post function only needs to return new_post.html
 
-    return render_template("new_post.html")
+    return render_template("new_post.html", session_name=get_session_name())
 
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
@@ -117,7 +125,7 @@ def login():
 #Render a list of users for index.html, click user name to see user's posts.
 @app.route('/')
 def index():
-    return render_template('index.html', users=get_users())
+    return render_template('index.html', users=get_users(), session_name=get_session_name())
 
 #logout function handles POST to /logout, delete username from session, redirect to blog
 @app.route('/logout')

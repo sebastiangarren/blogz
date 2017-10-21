@@ -12,6 +12,7 @@
         {% for post in posts %}
         <li><h3><a href="/blog?id={{post.id}}">{{post.title}}</a></h3></li>
             <p>{{post.body}}</p>
+            <p>By <i>{{user.username}}</i></p>
         {% endfor %}
         </ul>
     </form>

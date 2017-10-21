@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 
+
 {% block content %}
+
+
     <h1>Blogs</h1>
     <form action='/new_post' method='post'>
         <label>
@@ -11,7 +14,6 @@
 
     <hr />
 
-
     {% if posts|length == 0 %}
     <p>No blog posts yet</p>
     {% else %}
@@ -20,6 +22,12 @@
         {% for post in posts %}
         <li><h3><a href="/blog?id={{post.id}}">{{post.title}}</a></h3></li>
             <p>{{post.body}}</p>
+            {% for user in users %}
+                {% if user.id == post.author_id %}
+            <p>By <i>{{user.username}}</i></p>
+                {% endif %}
+            {% endfor %}
+            
         {% endfor %}
         </ul>
     </form>

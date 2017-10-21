@@ -21,6 +21,10 @@
             <a href="/login">Login</a>  |
             <a href="/signup">Signup</a>          
         </nav>
+        {% if session_name %}
+            <p><b>Logged in as: {{session_name}}</b></p>
+        {% endif %}
+       
 
         {% with messages = get_flashed_messages(with_categories=True) %}
         <ul>
