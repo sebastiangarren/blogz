@@ -28,7 +28,7 @@ def get_users():
 
 #display username if logged in
 def get_session_name():
-    if session['username']:
+    if session:
         session_name = session['username']
         return session_name
 
