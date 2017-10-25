@@ -4,8 +4,9 @@
 {% block content %}
 
 
-    <h1>Blogs</h1>
-    <form action='/new_post' method='post'>
+    
+    <form action='/new_post' method='post' class="container-fluid">
+        <h1>Blogs</h1>
         <label>
             Click here to write new post:
         </label>
@@ -17,7 +18,7 @@
     {% if posts|length == 0 %}
     <p>No blog posts yet</p>
     {% else %}
-    <form>
+    <form class="container" >
         <ul>
         {% for post in posts %}
         <li><h3><a href="/blog?id={{post.id}}">{{post.title}}</a></h3></li>
